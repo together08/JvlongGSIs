@@ -25,6 +25,13 @@ toolsdir="$LOCALDIR/tools"
 bindir="$toolsdir/bin/$HOST"
 imgextractor="$toolsdir/imgextractor/imgextractor.py"
 outdir="./output"
+
+echo "Update tools..."
+git pull
+cd erfan-tools
+git pull
+echo "Update finished."
+cd "$LOCALDIR"
 mkdir "$tmpdir"
 echo "Make ErfanGSI First."
 bash ./erfan-tools/url2GSI.sh "$rompath" "$romname" -ab
