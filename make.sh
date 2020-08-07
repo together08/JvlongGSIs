@@ -17,14 +17,14 @@ fi
 LOCALDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 mkdir output
 HOST="$(uname)"
-rompath = "$1"
-romname = "$2"
-tmpdir = "./temp/"
-scriptdir = "$LOCALDIR/scripts"
-toolsdir = "$LOCALDIR/tools"
-bindir = "$LOCALDIR/bin/$HOST"
-imgextractor = "$toolsdir/imgextractor/imgextractor.py"
-outdir = "./output"
+rompath="$1"
+romname="$2"
+tmpdir="./temp/"
+scriptdir="$LOCALDIR/scripts"
+toolsdir="$LOCALDIR/tools"
+bindir="$LOCALDIR/bin/$HOST"
+imgextractor="$toolsdir/imgextractor/imgextractor.py"
+outdir="./output"
 mkdir "$tmpdir"
 echo "Make ErfanGSI First."
 bash ./erfan-tools/url2GSI.sh "$rompath" "$romname" -ab
@@ -38,13 +38,13 @@ echo ""
 echo ""
 echo "ErfanGSI Make Finished."
 echo "Copy ErfanGSI's GSI."
-erfan_product = $(ls ./erfan-tools/output/ | grep -i "ErfanGSI" | grep "img" | grep "AB")
+erfan_product=$(ls ./erfan-tools/output/ | grep -i "ErfanGSI" | grep "img" | grep "AB")
 mv "$erfan_product" "$tmpdir/erfangsi.img"
 echo "Starting JvlongGSIs Make..."
 
 
-baseromdir = "$tmpdir/base-rom"
-erfandir = "$tmpdir/erfangsi"
+baseromdir="$tmpdir/base-rom"
+erfandir="$tmpdir/erfangsi"
 
 # Mount system.img and copy files
 bash ./unpack.sh "$rompath" "$baseromdir"
@@ -61,18 +61,18 @@ bash "$scriptdir/getinfo.sh"
 source "$scriptdir/getinfo.sh"
 
 # Get PT Info
-sourcetype = "Aonly"
+sourcetype="Aonly"
 if [ -d "$baseromdir/system/system" ]; then
-    sourcetype = "AB"
+    sourcetype="AB"
 fi
 
 # Copy bin files
 if ["$sourcetype" = "Aonly"]; then # Aonly or AB, Need to be know
-	baserombin = "baseromdir/system/bin"
+	baserombin="baseromdir/system/bin"
 else
-	baserombin = "baseromdir/system/system/bin"
+	baserombin="baseromdir/system/system/bin"
 fi
-erfanbin = "erfandir/system/system/bin"
+erfanbin="erfandir/system/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI
