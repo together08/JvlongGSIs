@@ -17,10 +17,14 @@ cd JvlongGSIs
 bash setup.sh
 ```
 
-### Finally, use this command to make:
+### Finally, make the GSI:
 
 > May you need to enter sudo password during making.
 
 ```bash
+# For local ROM, use this command:
 ./make.sh <Path to firmware> <ROM NAME>
+
+# For URL(Download Link), use this command:
+./urlmake.sh <URL of firmware> <ROM NAME>
 ```
