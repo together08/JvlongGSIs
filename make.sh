@@ -14,10 +14,12 @@ if [ "$2" == "" ]; then
     exit 1
 fi
 
-
+LOCALDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 rompath = "$1"
 romname = "$2"
 tmpdir = "./temp/"
+toolsdir = "$LOCALDIR/tools"
+imgextractor = "$toolsdir/imgextractor/imgextractor.py"
 mkdir "$tmpdir"
 echo "Make ErfanGSI First."
 bash ./erfan-tools/url2GSI.sh "$rompath" "$romname"
@@ -30,8 +32,8 @@ echo ""
 echo ""
 echo ""
 echo "ErfanGSI Make Finished."
-echo "Copy ErfanGSI's Product."
-erfan_product = $(ls ./erfan-tools/output/ | grep -il "ErfanGSI" | grep -il "AB" | grep -il "*.img")
+echo "Copy ErfanGSI's GSI."
+erfan_product = $(ls ./erfan-tools/output/ | grep -i "ErfanGSI" | grep "img" | grep "AB")
 mv "$erfan_product" "$tmpdir"/erfangsi.img
 echo "Starting JvlongGSIs Make..."
 
@@ -41,24 +43,13 @@ erfandir = "$tmpdir"/erfangsi
 
 # Mount system.img and copy files
 bash ./unpack.sh "$rompath" "$baseromdir"
-bash ./unpack.sh "$tmpdir"/erfangsi.img "$erfandir"
-cd "$tmpdir"
-cd base-rom
-mkdir system_mount
+cd "$baseromdir"
 mkdir system
-sudo mount ./system.img system_mount
-cp -r system_mount/* system
-sudo umount system_mount
-rm -rf system_mount
-cd ..
-cd erfangsi
-mkdir system_mount
-mkdir system
-sudo mount ./system.img system_mount
-cp -r system_mount/* system
-sudo umount system_mount
-rm -rf system_mount
+python3 $imgextractor ./system.img ./system
 
+cd "$erfandir"
+mkdir system
+python3 $imgextractor ./erfangsi.img ./system
 # Use diff to compare and add files
 diff
 # Package The GSI
