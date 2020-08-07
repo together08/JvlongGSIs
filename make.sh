@@ -56,6 +56,12 @@ python3 $imgextractor ./erfangsi.img ./system
 bash "$scriptdir/getinfo.sh"
 source "$scriptdir/getinfo.sh"
 
+# Get PT Info
+sourcetype = "Aonly"
+if [ -d "$baseromdir/system/system" ]; then
+    sourcetype = "AB"
+fi
+
 # Copy bin files
 if ["$sourcetype" = "Aonly"]; then # Aonly or AB, Need to be know
 	baserombin = "baseromdir/system/bin"
