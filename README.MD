@@ -19,6 +19,8 @@ bash setup.sh
 
 ### Finally, use this command to make:
 
+> May you need to enter sudo password during making.
+
 ```bash
 ./make.sh <Path to firmware> <ROM NAME>
 ```
