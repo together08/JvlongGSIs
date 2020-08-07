@@ -18,6 +18,7 @@ LOCALDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 rompath = "$1"
 romname = "$2"
 tmpdir = "./temp/"
+scriptdir = "$LOCALDIR/scripts"
 toolsdir = "$LOCALDIR/tools"
 imgextractor = "$toolsdir/imgextractor/imgextractor.py"
 mkdir "$tmpdir"
@@ -50,6 +51,13 @@ python3 $imgextractor ./system.img ./system
 cd "$erfandir"
 mkdir system
 python3 $imgextractor ./erfangsi.img ./system
-# Use diff to compare and add files
-diff
+
+# Get Device Info
+bash "$scriptdir"/getinfo.sh
+
+# Copy bin files
+baserombin = "baseromdir"/system/system/bin
+erfanbin = "erfandir"/system/system/bin
+cp -n "$erfanbin"/* "$baserombin"
+
 # Package The GSI
