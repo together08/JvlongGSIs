@@ -28,6 +28,12 @@ description=$(grep -oP "(?<=^ro.build.description=).*" -hs "$SYSTEMDIR"/build*.p
 [[ -z "${description}" ]] && description=$(grep -oP "(?<=^ro.system.build.description=).*" -hs "$SYSTEMDIR"/build*.prop)
 [[ -z "${description}" ]] && description="$flavor $release $id $incremental $tags"
 
+# Get PT Info
+sourcetype = "Aonly"
+if [ -d "$baseromdir/system/system" ]; then
+    sourcetype = "AB"
+fi
+
 printf "Android Version: $release
 Brand: $brand
 Model: $model
@@ -39,5 +45,5 @@ Tags: $tags
 Security Patch: $spl
 Fingerprint: $fingerprint
 Description: $description
-PT: $flag
+Project Treble: $sourcetype
 "
