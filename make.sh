@@ -67,12 +67,12 @@ if [ -d "$baseromdir/system/system" ]; then
 fi
 
 # Copy bin files
-if ["$sourcetype" = "Aonly"]; then # Aonly or AB, Need to be know
-	baserombin="baseromdir/system/bin"
+if ["$sourcetype"="Aonly"]; then # Aonly or AB, Need to be know
+	baserombin="$baseromdir/system/bin"
 else
-	baserombin="baseromdir/system/system/bin"
+	baserombin="$baseromdir/system/system/bin"
 fi
-erfanbin="erfandir/system/system/bin"
+erfanbin="$erfandir/system/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI
