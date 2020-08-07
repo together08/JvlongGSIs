@@ -15,12 +15,17 @@ if [ "$2" == "" ]; then
 fi
 
 LOCALDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+mkdir output
+HOST="$(uname)"
 rompath = "$1"
 romname = "$2"
 tmpdir = "./temp/"
 scriptdir = "$LOCALDIR/scripts"
 toolsdir = "$LOCALDIR/tools"
+bindir = "$LOCALDIR/bin/$HOST"
+"
 imgextractor = "$toolsdir/imgextractor/imgextractor.py"
+outdir = "./output"
 mkdir "$tmpdir"
 echo "Make ErfanGSI First."
 bash ./erfan-tools/url2GSI.sh "$rompath" "$romname" -ab
@@ -72,3 +77,5 @@ erfanbin = "erfandir/system/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI
+bash pack.sh
+
