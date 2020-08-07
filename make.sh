@@ -23,7 +23,7 @@ toolsdir = "$LOCALDIR/tools"
 imgextractor = "$toolsdir/imgextractor/imgextractor.py"
 mkdir "$tmpdir"
 echo "Make ErfanGSI First."
-bash ./erfan-tools/url2GSI.sh "$rompath" "$romname"
+bash ./erfan-tools/url2GSI.sh "$rompath" "$romname" -ab
 # If erfan make failed, don't go on
 if [ $? -ne 0 ]; then 
            echo "ErfanGSI make failed."
@@ -35,12 +35,12 @@ echo ""
 echo "ErfanGSI Make Finished."
 echo "Copy ErfanGSI's GSI."
 erfan_product = $(ls ./erfan-tools/output/ | grep -i "ErfanGSI" | grep "img" | grep "AB")
-mv "$erfan_product" "$tmpdir"/erfangsi.img
+mv "$erfan_product" "$tmpdir/erfangsi.img"
 echo "Starting JvlongGSIs Make..."
 
 
-baseromdir = "$tmpdir"/base-rom
-erfandir = "$tmpdir"/erfangsi
+baseromdir = "$tmpdir/base-rom"
+erfandir = "$tmpdir/erfangsi"
 
 # Mount system.img and copy files
 bash ./unpack.sh "$rompath" "$baseromdir"
@@ -53,11 +53,16 @@ mkdir system
 python3 $imgextractor ./erfangsi.img ./system
 
 # Get Device Info
-bash "$scriptdir"/getinfo.sh
+bash "$scriptdir/getinfo.sh"
+source "$scriptdir/getinfo.sh"
 
 # Copy bin files
-baserombin = "baseromdir"/system/system/bin
-erfanbin = "erfandir"/system/system/bin
+if ["$sourcetype" = "Aonly"]; then # Aonly or AB, Need to be know
+	baserombin = "baseromdir/system/bin"
+else
+	baserombin = "baseromdir/system/system/bin"
+fi
+erfanbin = "erfandir/system/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI
