@@ -66,7 +66,7 @@ mkdir -p system
 python3 $imgextractor ./erfangsi.img ./system
 
 # Get Device Info
-bash "$scriptdir/getinfo.sh" "$baseromdir"
+bash "$scriptdir/getinfo.sh" "$baseromdir/system"
 source "$scriptdir/getinfo.sh"
 
 # Get PT Info
