@@ -75,12 +75,14 @@ if [ -d "$baseromdir/system/system" ]; then
     sourcetype="AB"
 fi
 
-# Copy bin files
+# Change bin dir with sourcetype
 if ["$sourcetype" == "Aonly"]; then # Aonly or AB, Need to be know
 	baserombin="$baseromdir/system/bin"
 else
 	baserombin="$baseromdir/system/system/bin"
 fi
+
+# Copy bin files
 erfanbin="$erfandir/system/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
