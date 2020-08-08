@@ -54,6 +54,7 @@ echo "Starting JvlongGSIs Make..."
 
 baseromdir="$tmpdir/base-rom"
 erfandir="$tmpdir/erfangsi"
+mkdir -p "$erfandir"
 
 # Mount system.img and copy files
 bash ./unpack.sh "$rompath" "$baseromdir"
