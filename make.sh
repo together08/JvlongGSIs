@@ -75,7 +75,7 @@ if [ -d "$baseromdir/system/system" ]; then
 fi
 
 # Copy bin files
-if ["$sourcetype"="Aonly"]; then # Aonly or AB, Need to be know
+if ["$sourcetype" == "Aonly"]; then # Aonly or AB, Need to be know
 	baserombin="$baseromdir/system/bin"
 else
 	baserombin="$baseromdir/system/system/bin"
