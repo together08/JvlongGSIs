@@ -46,8 +46,8 @@ echo ""
 echo ""
 echo "ErfanGSI Make Finished."
 echo "Copy ErfanGSI's GSI."
-erfan_product=$(ls "./erfan-tools/output/" | grep -i "ErfanGSI" | grep "img" | grep "AB")
-cp $erfan_product "$tmpdir"
+erfan_product="$(ls "./erfan-tools/output/" | grep -i "ErfanGSI" | grep "img" | grep "AB")"
+cp "$erfan_product" "$tmpdir"
 mv "$tmpdir"/$erfan_product erfangsi.img
 echo "Starting JvlongGSIs Make..."
 
