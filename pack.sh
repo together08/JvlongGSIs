@@ -1,7 +1,7 @@
 echo "Start Packing"
 echo ""
 dirsize="$(du -sm "baseromdir"/system | awk '{print $1}' | sed 's/$/& (MB)/')"
-size=$dirsize+130
+size=$dirsize + 130
 cd "$LOCALDIR"
 time=$(date "+%Y%m%d")
 
