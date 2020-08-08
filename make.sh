@@ -19,7 +19,7 @@ mkdir output
 HOST="$(uname)"
 rompath="$1"
 romname="$2"
-tmpdir="./temp/"
+tmpdir="./temp"
 scriptdir="$LOCALDIR/scripts"
 toolsdir="$LOCALDIR/tools"
 bindir="$toolsdir/bin/$HOST"
@@ -32,7 +32,8 @@ cd erfan-tools
 git pull
 echo "Update finished."
 cd "$LOCALDIR"
-mkdir "$tmpdir"
+
+mkdir -p "$tmpdir"
 echo "Make ErfanGSI First."
 bash ./erfan-tools/url2GSI.sh "$rompath" "$romname" -ab
 # If erfan make failed, don't go on
@@ -46,7 +47,7 @@ echo ""
 echo "ErfanGSI Make Finished."
 echo "Copy ErfanGSI's GSI."
 erfan_product=$(ls "./erfan-tools/output/" | grep -i "ErfanGSI" | grep "img" | grep "AB")
-cp $erfan_product "$tmpdir/erfangsi.img"
+cp $erfan_product "$tmpdir"/erfangsi.img
 echo "Starting JvlongGSIs Make..."
 
 
@@ -56,15 +57,15 @@ erfandir="$tmpdir/erfangsi"
 # Mount system.img and copy files
 bash ./unpack.sh "$rompath" "$baseromdir"
 cd "$baseromdir"
-mkdir system
+mkdir -p system
 python3 $imgextractor ./system.img ./system
 
 cd "$erfandir"
-mkdir system
+mkdir -p system
 python3 $imgextractor ./erfangsi.img ./system
 
 # Get Device Info
-bash "$scriptdir/getinfo.sh"
+bash "$scriptdir/getinfo.sh" "$baseromdir"
 source "$scriptdir/getinfo.sh"
 
 # Get PT Info
