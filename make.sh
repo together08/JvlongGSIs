@@ -77,7 +77,7 @@ if [ -d "$baseromdir/system/system" ]; then
 fi
 
 # Change bin dir with sourcetype
-if ["$sourcetype" == "Aonly"]; then # Aonly or AB, Need to be know
+if [ "$sourcetype" == "Aonly" ]; then # Aonly or AB, Need to be know
 	baserombin="$baseromdir/system/bin"
 else
 	baserombin="$baseromdir/system/system/bin"
