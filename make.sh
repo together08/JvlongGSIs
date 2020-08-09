@@ -61,12 +61,10 @@ erfandir="$tmpdir/erfangsi"
 # Mount system.img and copy files
 bash ./unpack.sh "$rompath" "$baseromdir"
 cd "$baseromdir"
-mkdir -p system
-python3 $imgextractor ./system.img ./system
+python3 $imgextractor ./system.img ./
 
 cd "$erfandir"
-mkdir -p system
-python3 $imgextractor ./erfangsi.img ./system
+python3 $imgextractor ./erfangsi.img ./
 
 # Get Device Info
 bash "$scriptdir/getinfo.sh" "$baseromdir/system"
@@ -86,7 +84,7 @@ else
 fi
 
 # Copy bin files
-erfanbin="$erfandir/system/system/bin"
+erfanbin="$erfandir/erfangsi/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI

@@ -39,5 +39,4 @@ Tags: $tags
 Security Patch: $spl
 Fingerprint: $fingerprint
 Description: $description
-Project Treble: $sourcetype
 "
