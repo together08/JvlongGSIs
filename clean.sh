@@ -1,4 +1,4 @@
 #!/bin/bash
 
-rm -rf "$LOCALDIR/erfan-tools/output/*
+rm -rf "$LOCALDIR"/erfan-tools/output/*
 
