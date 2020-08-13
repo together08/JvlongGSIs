@@ -19,12 +19,12 @@ mkdir output
 HOST="$(uname)"
 rompath="$1"
 romname="$2"
-tmpdir="./temp"
+tmpdir="$LOCALDIR/temp"
 scriptdir="$LOCALDIR/scripts"
 toolsdir="$LOCALDIR/tools"
 bindir="$toolsdir/bin/$HOST"
 imgextractor="$toolsdir/imgextractor/imgextractor.py"
-outdir="./output"
+outdir="$LOCALDIR/output"
 
 echo "Update tools..."
 git pull
