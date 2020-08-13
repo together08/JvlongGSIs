@@ -60,10 +60,10 @@ erfandir="$tmpdir/erfangsi"
 # Mount system.img and copy files
 bash ./unpack.sh "$rompath" "$tmpdir"
 
-python3 $imgextractor ./system.img ./
+python3 $imgextractor "$tmpdir"/system.img "$tmpdir"
 mv system base-rom
 
-python3 $imgextractor ./erfangsi.img ./
+python3 $imgextractor "$tmpdir"/erfangsi.img "$tmpdir"
 
 # Get PT Info
 sourcetype="Aonly"
