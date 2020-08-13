@@ -83,7 +83,7 @@ erfanbin="$erfandir/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI
-bash pack.sh
+bash "$LOCALDIR"/pack.sh
 
 # Clean up
-bash clean.sh 
+bash "$LOCALDIR"/clean.sh 
