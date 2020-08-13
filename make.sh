@@ -72,7 +72,7 @@ if [ -d "$baseromdir/system" ]; then
 fi
 
 # Change bin dir with sourcetype
-if [ "$sourcetype" == "Aonly" ]; then # Aonly or AB, Need to be know
+if [ "$sourcetype" == "Aonly" ]; then 
 	baserombin="$baseromdir/bin"
 else
 	baserombin="$baseromdir/system/bin"
@@ -84,3 +84,6 @@ cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI
 bash pack.sh
+
+# Clean up
+bash clean.sh 
