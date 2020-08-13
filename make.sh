@@ -50,7 +50,6 @@ erfan_product="$(ls "./erfan-tools/output/" | grep -i "ErfanGSI" | grep "img" | 
 cp ./erfan-tools/output/"$erfan_product" "$tmpdir"
 cd "$tmpdir"
 mv $erfan_product erfangsi.img
-mkdir erfangsi
 cd ..
 echo "Starting JvlongGSIs Make..."
 
@@ -59,34 +58,29 @@ baseromdir="$tmpdir/base-rom"
 erfandir="$tmpdir/erfangsi"
 
 # Mount system.img and copy files
-bash ./unpack.sh "$rompath" "$baseromdir"
-cd "$baseromdir"
+bash ./unpack.sh "$rompath" "$tmpdir"
+
 python3 $imgextractor ./system.img ./
+mv system base-rom
 
-cd "$erfandir"
 python3 $imgextractor ./erfangsi.img ./
-
-# Get Device Info
-bash "$scriptdir/getinfo.sh" "$baseromdir/system"
-source "$scriptdir/getinfo.sh"
 
 # Get PT Info
 sourcetype="Aonly"
-if [ -d "$baseromdir/system/system" ]; then
+if [ -d "$baseromdir/system" ]; then
     sourcetype="AB"
 fi
 
 # Change bin dir with sourcetype
 if [ "$sourcetype" == "Aonly" ]; then # Aonly or AB, Need to be know
-	baserombin="$baseromdir/system/bin"
+	baserombin="$baseromdir/bin"
 else
-	baserombin="$baseromdir/system/system/bin"
+	baserombin="$baseromdir/system/bin"
 fi
 
 # Copy bin files
-erfanbin="$erfandir/erfangsi/system/bin"
+erfanbin="$erfandir/system/bin"
 cp -n "$erfanbin"/* "$baserombin"
 
 # Package The GSI
 bash pack.sh
-
