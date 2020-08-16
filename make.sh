@@ -47,7 +47,7 @@ echo ""
 echo "ErfanGSI Make Finished."
 echo "Copy ErfanGSI's GSI."
 erfan_product="$(ls "./erfan-tools/output/" | grep -i "ErfanGSI" | grep "img" | grep "AB")"
-cp ./erfan-tools/output/"$erfan_product" "$tmpdir"
+cp ./erfan-tools/output/$erfan_product "$tmpdir"
 cd "$tmpdir"
 mv $erfan_product erfangsi.img
 cd ..
