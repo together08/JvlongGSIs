@@ -34,6 +34,10 @@ echo "Update finished."
 cd "$LOCALDIR"
 
 mkdir -p "$tmpdir"
+
+# Delete erfan's output dir
+rm -rf ./erfan-tools/output
+
 echo "Make ErfanGSI First."
 bash ./erfan-tools/url2GSI.sh "$rompath" "$romname" -ab
 # If erfan make failed, don't go on
